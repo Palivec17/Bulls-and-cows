@@ -24,3 +24,12 @@ def validuj_tip(tip: str) -> str | None:
         return "Číslice se nesmí opakovat. Zadej unikátní číslice."
     return None
 
+
+def spocitej_bulls_a_cows(tajne: str, tip: str) -> tuple[int, int]:
+    """Porovná hráčův tip s tajným číslem a vrátí počet bulls a cows."""
+    bulls = sum(t == s for t, s in zip(tip, tajne))
+    nezapadajici_tajne = [s for t, s in zip(tip, tajne) if t != s]
+    nezapadajici_tip = [t for t, s in zip(tip, tajne) if t != s]
+    cows = sum(min(nezapadajici_tajne.count(c), nezapadajici_tip.count(c)) for c in set(nezapadajici_tip))
+    return bulls, cows
+
