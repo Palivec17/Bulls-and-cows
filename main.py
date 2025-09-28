@@ -48,3 +48,37 @@ def vypis_uvod() -> None:
     print("Pojďme si zahrát hru Bulls and Cows.")
     print("-----------------------------------------------")
 
+
+def hraj_jednu_hru() -> tuple[int, float]:
+    """Spustí jedno kolo hry a vrátí počet pokusů a čas v sekundách."""
+    vypis_uvod()
+    tajne_cislo: str = vygeneruj_tajne_cislo()
+    pokusy: int = 0
+    start = time.time()
+
+    while True:
+        print("-----------------------------------------------")
+        print("Zadej číslo:")
+        print("-----------------------------------------------")
+        tip: str = input(">>> ").strip()
+
+        chyba: str | None = validuj_tip(tip)
+        if chyba:
+            print(f"Neplatný vstup: {chyba}")
+            continue
+
+        pokusy += 1
+        bulls, cows = spocitej_bulls_a_cows(tajne_cislo, tip)
+
+        if bulls == DELKA_CISLA:
+            konec = time.time()
+            cas = konec - start
+            print("Správně, uhodl jsi tajné číslo!")
+            print(f"Našel jsi ho na {pokusy}. pokus.")
+            print(f"Čas potřebný k uhodnutí: {cas:.2f} sekund.")
+            print("-----------------------------------------------")
+            print("Gratuluji to je úžasné!")
+            return pokusy, cas
+        else:
+            print(formatuj_vysledek(bulls, cows))
+
