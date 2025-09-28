@@ -82,3 +82,23 @@ def hraj_jednu_hru() -> tuple[int, float]:
         else:
             print(formatuj_vysledek(bulls, cows))
 
+
+def hraj_hru() -> None:
+    """Hlavní smyčka hry s možností opakování a statistikami."""
+    statistiky: list[tuple[int, float]] = []
+
+    while True:
+        pokusy, cas = hraj_jednu_hru()
+        statistiky.append((pokusy, cas))
+
+        print("Chceš hrát znovu? (a/n):")
+        odpoved: str = input(">>> ").strip().lower()
+        if odpoved != 'a':
+            print("\n📊 Statistiky her:")
+            for i, (p, t) in enumerate(statistiky, 1):
+                print(f"Hra {i}: {p} pokusů, {t:.2f} sekund")
+            print("Díky za hru! Měj se hezky.")
+            break
+
+if __name__ == "__main__":
+    hraj_hru()
