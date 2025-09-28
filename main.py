@@ -33,3 +33,18 @@ def spocitej_bulls_a_cows(tajne: str, tip: str) -> tuple[int, int]:
     cows = sum(min(nezapadajici_tajne.count(c), nezapadajici_tip.count(c)) for c in set(nezapadajici_tip))
     return bulls, cows
 
+
+def formatuj_vysledek(bulls: int, cows: int) -> str:
+    """Vrátí výsledek s ohledem na jednotné/množné číslo."""
+    bull_slovo = "bull" if bulls == 1 else "bulls"
+    cow_slovo = "cow" if cows == 1 else "cows"
+    return f"{bulls} {bull_slovo}, {cows} {cow_slovo}"
+
+def vypis_uvod() -> None:
+    """Vypíše úvodní zprávu."""
+    print("Ahoj!")
+    print("-----------------------------------------------")
+    print("Vygeneroval jsem pro tebe náhodné 4místné číslo.")
+    print("Pojďme si zahrát hru Bulls and Cows.")
+    print("-----------------------------------------------")
+
