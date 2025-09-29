@@ -73,11 +73,13 @@ def hraj_jednu_hru() -> tuple[int, float]:
         if bulls == DELKA_CISLA:
             konec = time.time()
             cas = konec - start
+            minuty = int(cas // 60)
+            sekundy = int(cas % 60)
             print("Správně, uhodl jsi tajné číslo!")
             print(f"Našel jsi ho na {pokusy}. pokus.")
-            print(f"Čas potřebný k uhodnutí: {cas:.2f} sekund.")
+            print(f"Čas potřebný k uhodnutí: {minuty}:{sekundy:02d} minut.")
             print("-----------------------------------------------")
-            print("Gratuluji to je úžasné!")
+            print("To je úžasné!")
             return pokusy, cas
         else:
             print(formatuj_vysledek(bulls, cows))
@@ -96,9 +98,13 @@ def hraj_hru() -> None:
         if odpoved != 'a':
             print("\n📊 Statistiky her:")
             for i, (p, t) in enumerate(statistiky, 1):
-                print(f"Hra {i}: {p} pokusů, {t:.2f} sekund")
+                minuty = int(t // 60)
+                sekundy = int(t % 60)
+                print(f"Hra {i}: {p} pokusů, {minuty}:{sekundy:02d} minut")
             print("Díky za hru! Měj se hezky.")
             break
 
 if __name__ == "__main__":
     hraj_hru()
+
+
